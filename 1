@@ -1,0 +1,18 @@
+#include "binary_trees.h"
+
+/**
+ * binary_tree_size - tree size
+ * @tree: pointer to root node
+ * Return: size
+ */
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+size_t count = 0, size_left = 0, size_right = 0;
+
+if (tree == NULL)
+	return (0);
+count += 1;
+size_left += tree->left ? binary_tree_size(tree->left) + 1 : 0;
+size_right += tree->right ? binary_tree_size(tree->right) + 1 : 0;
+return (count + size_left + size_right);
+}
