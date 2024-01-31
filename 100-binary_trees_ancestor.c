@@ -16,9 +16,13 @@ size_t depth_second = binary_tree_depth(second);
 const binary_tree_t *deeper = depth_first > depth_second ? first : second;
 const binary_tree_t *shallower = depth_first > depth_second ? second : first;
 
+if (!first || !second)
+	return (NULL);
 while (depth_first != depth_second)
 {
 deeper = deeper->parent;
+if (deeper == NULL)
+	return (NULL);
 if (depth_first > depth_second)
 depth_first--;
 else
@@ -31,5 +35,5 @@ deeper = deeper->parent;
 shallower = shallower->parent;
 }
 
-return ((binary_tree_t *)deeper);
+return ((binary_tree_t *)(deeper && shallower ? deeper : NULL));
 }
