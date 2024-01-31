@@ -18,22 +18,15 @@ const binary_tree_t *shallower = depth_first > depth_second ? second : first;
 
 if (!first || !second)
 	return (NULL);
-while (depth_first != depth_second)
-{
-deeper = deeper->parent;
-if (deeper == NULL)
-	return (NULL);
-if (depth_first > depth_second)
-depth_first--;
-else
-depth_second--;
-}
 
-while (deeper != shallower)
-{
-deeper = deeper->parent;
-shallower = shallower->parent;
-}
+if (first == second)
+return ((binary_tree_t *)first);
 
-return ((binary_tree_t *)(deeper && shallower ? deeper : NULL));
+deeper = first->parent;
+shallower = second->parent;
+if (first == shallower || !deeper || (!deeper->parent && shallower))
+return (binary_trees_ancestor(first, shallower));
+else if (deeper == second || !shallower || (!shallower->parent && deeper))
+return (binary_trees_ancestor(deeper, second));
+return (binary_trees_ancestor(deeper, shallower));
 }
